@@ -1,8 +1,5 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="header-dark.png">
-    <img src="header-light.png" alt="ZSO Emme – Bereit, wenn es zählt." width="100%">
-  </picture>
+  <img src="header-light.png" alt="ZSO Emme – Bereit, wenn es zählt." width="100%">
 </p>
 
 ## ZSO Emme
