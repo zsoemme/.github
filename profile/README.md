@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="./banner.png" alt="ZSO Emme — Bereit, wenn es zählt. Zivilschutz · Kanton Luzern" width="100%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="header-dark.png">
+    <img src="header-light.png" alt="ZSO Emme – Bereit, wenn es zählt." width="100%">
+  </picture>
 </p>
 
 ## ZSO Emme
