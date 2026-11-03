@@ -1,0 +1,31 @@
+name: Profil
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  bilder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - name: Bilder im README prüfen
+        run: |
+          set -u
+          f=profile/README.md
+          fail=0
+          paths=$( { grep -oE 'src="[^"]+"' "$f" | sed -E 's/^src="(.*)"$/\1/'
+                     grep -oE '!\[[^]]*\]\([^)]+\)' "$f" | sed -E 's/^.*\(([^) ]+).*$/\1/'; } | sort -u)
+          [ -n "$paths" ] || { echo "Keine Bilder gefunden"; exit 1; }
+          while IFS= read -r p; do
+            case "$p" in http*) continue ;; esac
+            file="profile/$p"
+            if [ ! -s "$file" ]; then echo "FEHLT oder leer: $p"; fail=1; continue; fi
+            case "$p" in *.png)
+              [ "$(head -c 8 "$file" | xxd -p)" = "89504e470d0a1a0a" ] || { echo "Keine PNG-Signatur: $p"; fail=1; continue; } ;;
+            esac
+            echo "ok: $p"
+          done <<< "$paths"
+          exit "$fail"
