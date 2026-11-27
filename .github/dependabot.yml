@@ -1,0 +1,13 @@
+# Managed dependency & GitHub Actions updates (GitHub-native, free on private repos).
+# Pairs with Dependabot security alerts + automated security fixes (repo settings).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    ignore:
+      # Wiederverwendbare zsoemme-Workflows folgen dem wandernden v1-Tag
+      # (release-tag.yml bewegt es); Punkt-Release-Bumps frieren das Repo ein.
+      - dependency-name: "zsoemme/release-management/*"
+    directory: "/"
+    schedule:
+      interval: monthly
+    labels: ["ci"]
